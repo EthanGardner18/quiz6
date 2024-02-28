@@ -1,8 +1,8 @@
 import math
+from abc import ABC, abstractmethod
 
-
-class Shape:
-    
+class Shape(ABC):
+    @abstractmethod
     def get_area():
         print("area")
 
