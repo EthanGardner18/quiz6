@@ -1,32 +1,39 @@
+# To fix the violation, just add it into the class
+
 from abc import ABC, abstractmethod
 import math
 
 class Shape(ABC):
     @abstractmethod
-    
-    def set_width(self,width):
-        self.width = width
-
-    def set_height(self,height):
-        self.height = height
 
     def get_area():
         print("base class area")
 
-class Circle(Shape):
-    def __init__(self,radius):
-        self.radius = radius
+class setWidth(ABC):
+    @abstractmethod
 
     def set_width(self,width):
         self.width = width
 
+class setHeight(ABC):
+    @abstractmethod
+
     def set_height(self,height):
         self.height = height
+
+class Circle(Shape, setWidth):
+    
+    def __init__(self,radius):
+        self.radius = radius
+
+    # the width in this case can just be altered for the radius
+    def set_width(self,radius):
+        self.radius = radius
 
     def get_area(self):
         return math.pi * self.radius * self.radius
 
-class Rectangle(Shape):
+class Rectangle(Shape, setWidth, setHeight):
    
     def __init__(self,width, height):
         self.width = width
@@ -41,7 +48,7 @@ class Rectangle(Shape):
     def get_area(self):
         return self.width * self.height
 
-class Triangle(Shape):
+class Triangle(Shape, setWidth, setHeight):
    
     def __init__(self,width,height):
         self.width = width
