@@ -29,7 +29,7 @@ class LogManager:
     def log_message(self, message):
         self.logger.log(message)
 
-if __name__ == "__main__":
+def main():
     logging_library_logger = LoggingLibrary()
     console_logger = ConsoleLogger()
     file_logger = FileLogger('log.txt')
@@ -42,3 +42,7 @@ if __name__ == "__main__":
 
     log_manager = LogManager(file_logger)
     log_manager.log_message("This is a log message written to file")
+
+
+if __name__ == "__main__":
+    main()
