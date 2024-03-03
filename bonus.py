@@ -19,6 +19,7 @@ class FileStorage(DataStorage):
 class Display(ABC):
     @abstractmethod
     def update(self, data: dict):
+        print("Updating Display")
         pass
 
 class ConsoleDisplay(Display):
@@ -42,14 +43,19 @@ class ActivityMonitor:
 
 
 # This activity class takes the activities as a string and adds them to the database, therefor the other activities are easy to add
-# and because step count distance and calorie count are seperate classes they dont have to be initialized
+# and because step count distance and calorie count are seperate classes they are able to be general, different parameters can be added 
+# for different types of actvities. Such as adding heartRate or time of activity
+            
+# class heartRate(Activity):
+#   def update():
+#       ...
 class Activity(ABC):
     @abstractmethod
     def update(self, data: dict):
         print("Updating")
         pass
 
-class StepCount(Activity):
+class Steps(Activity):
     def update(self, data: dict):
         if "steps" in data:
             print(f"Step Count: {data['steps']}")
@@ -69,8 +75,9 @@ def main():
     console_display = ConsoleDisplay()
     activity_monitor = ActivityMonitor(file_storage, [console_display])
 
-    activity_monitor.collect_activity_data("running", {"steps": 5000, "distance": 5, "calories": 300})
+    activity_monitor.collect_activity_data("swimming", {"distance": 5, "calories": 300})
     activity_monitor.collect_activity_data("cycling", {"distance": 10, "calories": 200})
+    activity_monitor.collect_activity_data("walking", {"distance": 50, "calories": 800, "steps": 50000})
 
 if __name__ == "__main__":
     main()
